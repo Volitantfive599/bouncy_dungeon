@@ -1,4 +1,5 @@
 extends RigidBody2D
+
 @export var projectile_scene : PackedScene
 @export var player_num : String
 
