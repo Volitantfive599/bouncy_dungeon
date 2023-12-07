@@ -78,7 +78,7 @@ _data = {
 "normalspin": SubResource("Animation_s5oyc")
 }
 
-[node name="projectile" type="RigidBody2D"]
+[node name="Projectile" type="RigidBody2D"]
 physics_material_override = ExtResource("1_lhwgq")
 gravity_scale = 0.0
 max_contacts_reported = 2

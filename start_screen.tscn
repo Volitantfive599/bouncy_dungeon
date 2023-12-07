@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cimpep6oiuj6g"]
+[gd_scene load_steps=8 format=3 uid="uid://cimpep6oiuj6g"]
 
 [ext_resource type="TileSet" uid="uid://bjm7jrewce46r" path="res://main_tiles.tres" id="1_8oiiv"]
 [ext_resource type="Script" path="res://start_screen.gd" id="2_ccto7"]
 [ext_resource type="AudioStream" uid="uid://de3ntp4i71ior" path="res://NinjaAdventure/Musics/1 - Adventure Begin.ogg" id="2_egccw"]
 [ext_resource type="PackedScene" uid="uid://dbk7h1a2tg05a" path="res://projectile.tscn" id="3_ap3oh"]
+[ext_resource type="AudioStream" uid="uid://bhb6lmp1h8afk" path="res://NinjaAdventure/Sounds/Menu/Accept.wav" id="5_1xl3t"]
 
 [sub_resource type="Curve2D" id="Curve2D_0hfby"]
 _data = {
@@ -25,7 +26,7 @@ projectile_scene = ExtResource("3_ap3oh")
 position = Vector2(192, 116)
 zoom = Vector2(5, 5)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="TitleMusic" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = ExtResource("2_egccw")
 autoplay = true
@@ -40,17 +41,26 @@ curve = SubResource("Curve2D_0hfby")
 wait_time = 0.2
 autostart = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="StartScreen" type="CanvasLayer" parent="."]
+visible = false
 
-[node name="Label" type="Label" parent="CanvasLayer"]
-offset_top = 121.0
-offset_right = 1152.0
-offset_bottom = 292.0
+[node name="Label" type="Label" parent="StartScreen"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -204.0
+offset_right = 576.0
+offset_bottom = -33.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Bouncy Dungeon"
 label_settings = SubResource("LabelSettings_l4tnd")
 horizontal_alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer"]
+[node name="StartButton" type="Button" parent="StartScreen"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -65,4 +75,27 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 100
 text = "Start"
 
+[node name="CharacterSelect" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Label" type="Label" parent="CharacterSelect"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -576.0
+offset_top = -322.5
+offset_right = 576.0
+offset_bottom = -151.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Choose Your Character"
+label_settings = SubResource("LabelSettings_l4tnd")
+horizontal_alignment = 1
+
+[node name="AcceptMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_1xl3t")
+
 [connection signal="timeout" from="ShurikenTimer" to="." method="_on_shuriken_timer_timeout"]
+[connection signal="pressed" from="StartScreen/StartButton" to="." method="_on_start_button_pressed"]

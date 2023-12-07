@@ -1,36 +1,11 @@
 extends RigidBody2D
 
 @export var projectile_scene : PackedScene
-@export var player_num : String
 
 signal got_hit
 
-var player_sprites = {
-	"0":{ # Frog Guy
-		"attack":load("res://NinjaAdventure/Actor/Characters/MaskFrog/SeparateAnim/Attack.png"),
-		"walk":load("res://NinjaAdventure/Actor/Characters/MaskFrog/SeparateAnim/Walk.png"),
-		"death":load("res://NinjaAdventure/Actor/Characters/MaskFrog/Dead14.png"),
-		"shuriken":load("res://NinjaAdventure/FX/Projectile/ShurikenMagic1.png")
-	},
-	"1":{ # Black Ninja Mage
-		"attack":load("res://NinjaAdventure/Actor/Characters/BlackNinjaMage/SeparateAnim/Attack.png"),
-		"walk":load("res://NinjaAdventure/Actor/Characters/BlackNinjaMage/SeparateAnim/Walk.png"),
-		"death":load("res://NinjaAdventure/Actor/Characters/BlackNinjaMage/SeparateAnim/Dead.png"),
-		"shuriken":load("res://NinjaAdventure/FX/Projectile/ShurikenMagic2.png")
-	},
-	"2":{ # Blue Ninja
-		"attack":load("res://NinjaAdventure/Actor/Characters/BlueNinja/SeparateAnim/Attack.png"),
-		"walk":load("res://NinjaAdventure/Actor/Characters/BlueNinja/SeparateAnim/Walk.png"),
-		"death":load("res://NinjaAdventure/Actor/Characters/BlueNinja/SeparateAnim/Dead.png"),
-		"shuriken":load("res://NinjaAdventure/FX/Projectile/ShurikenMagic3.png")
-	},
-	"3":{ # Tubby Samurai
-		"attack":load("res://NinjaAdventure/Actor/Characters/Samurai/SeparateAnim/Attack.png"),
-		"walk":load("res://NinjaAdventure/Actor/Characters/Samurai/SeparateAnim/Walk.png"),
-		"death":load("res://NinjaAdventure/Actor/Characters/Samurai/SeparateAnim/Dead.png"),
-		"shuriken":load("res://NinjaAdventure/FX/Projectile/ShurikenMagic0.png")
-	}
-}
+var player_sprite
+var player_num 
 var dir = "down"
 var attackDir
 var inputs = {
@@ -50,8 +25,11 @@ var health = 3
 enum states {IDLE, RUN, ATTACK, DEAD, HURT, DASH}
 var state = states.IDLE
 
-func _integrate_forces(state):
-	pass
+func start(player_id, sprite):
+	player_sprite = sprite
+	player_num = str(player_id)
+	hide()
+	freeze = true
 
 func _physics_process(delta):
 	choose_action()
@@ -78,7 +56,8 @@ func choose_action():
 					dir = direction
 			input = Input.get_vector("left" + player_num, "right" + player_num, "up" + player_num, "down" + player_num)
 			if Input.is_action_pressed("dash" + player_num) and !locked:
-				state = states.DASH
+				pass
+				# state = states.DASH
 			elif input != Vector2.ZERO:
 				state = states.RUN
 
@@ -86,18 +65,18 @@ func choose_action():
 		states.DEAD:
 			$Label.text = "dead"
 			set_physics_process(false)
-			$Sprite2D.texture = player_sprites[player_num]["death"]
+			$Sprite2D.texture = player_sprite["death"]
 			$AnimationPlayer.play("death")
 			
 		states.IDLE:
 			$Label.text = "idle"
-			$Sprite2D.texture = player_sprites[player_num]["walk"]
+			$Sprite2D.texture = player_sprite["walk"]
 			$AnimationPlayer.play("walk" + dir)
 			$AnimationPlayer.stop()
 			
 		states.RUN:
 			$Label.text = "run"
-			$Sprite2D.texture = player_sprites[player_num]["walk"]
+			$Sprite2D.texture = player_sprite["walk"]
 			$AnimationPlayer.play("walk" + dir)
 			apply_force(input * run_speed)
 			
@@ -105,7 +84,7 @@ func choose_action():
 			
 		states.ATTACK:
 			$Label.text = "attack"
-			$Sprite2D.texture = player_sprites[player_num]["attack"]
+			$Sprite2D.texture = player_sprite["attack"]
 			dir = attackDir
 			$AnimationPlayer.play("attack" + attackDir)
 			
@@ -114,7 +93,7 @@ func choose_action():
 				attacks_left -= 1
 				var new_projectile = projectile_scene.instantiate()
 				get_tree().root.add_child(new_projectile)
-				new_projectile.start(position + (16 * attackInput), attackInput.normalized(), player_sprites[player_num]["shuriken"])
+				new_projectile.start(position + (16 * attackInput), attackInput.normalized(), player_sprite["shuriken"])
 			
 				await get_tree().create_timer(0.5).timeout
 				can_attack = true
