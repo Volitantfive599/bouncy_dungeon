@@ -532,13 +532,12 @@ _data = {
 [sub_resource type="LabelSettings" id="LabelSettings_054m4"]
 font_size = 10
 
-[node name="Player" type="RigidBody2D"]
+[node name="Player" type="RigidBody2D" groups=["Players"]]
 z_index = 1
 gravity_scale = 0.0
 lock_rotation = true
 script = ExtResource("1_1y1mh")
 projectile_scene = ExtResource("2_ygnax")
-player_num = "0"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -1)
