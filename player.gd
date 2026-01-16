@@ -3,6 +3,7 @@ extends RigidBody2D
 @export var projectile_scene : PackedScene
 
 signal got_hit
+signal player_died
 
 var player_sprite
 var player_num 
@@ -24,13 +25,22 @@ var dash = false
 var health = 3
 enum states {IDLE, RUN, ATTACK, DEAD, HURT, DASH}
 var state = states.IDLE
+var spawn_point = null
 
 func start(player_id, sprite):
+	get_node("/root/Main").level_start.connect(player_alive)
+	get_node("/root/Main").level_finished.connect(all_players_dead)
 	player_sprite = sprite
 	player_num = str(player_id)
 	hide()
 	freeze = true
 
+
+func _integrate_forces(body_state):
+	if spawn_point:
+		body_state.transform.origin = spawn_point
+		spawn_point = null
+	
 func _physics_process(delta):
 	choose_action()
 
@@ -63,6 +73,8 @@ func choose_action():
 
 	match state:
 		states.DEAD:
+			locked = true
+			player_died.emit(self)
 			$Label.text = "dead"
 			set_physics_process(false)
 			$Sprite2D.texture = player_sprite["death"]
@@ -119,17 +131,30 @@ func _on_attack_timer_timeout():
 
 
 func hurt(amount):
-	if health > 1:
+	health -= amount
+	got_hit.emit(health)
+	if health > 0:
 		$Hurt_Label.text = "Ouch"
-		health -= amount
-		got_hit.emit(health)
 		var prev_state = state
 		state = states.HURT
 		await get_tree().create_timer(0.2).timeout
 		$Hurt_Label.text = ""
 		state = prev_state
 	else:
-		locked = true
-		health -= amount
-		got_hit.emit(health)
 		state = states.DEAD
+
+
+func player_alive():
+	show()
+	freeze = false
+	dir = "down"
+	health = 3
+	attacks_left = 3
+	state = states.IDLE
+	locked = false
+	set_physics_process(true)
+
+
+func all_players_dead():
+	hide()
+	freeze = true

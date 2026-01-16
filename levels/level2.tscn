@@ -1,12 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr4o33olgrykn"]
+[gd_scene load_steps=7 format=3 uid="uid://cse1cmke63di8"]
 
-[ext_resource type="TileSet" uid="uid://bjm7jrewce46r" path="res://main_tiles.tres" id="1_cupw2"]
-[ext_resource type="Script" path="res://levels/level.gd" id="2_1w0ch"]
-[ext_resource type="AudioStream" uid="uid://cmdp3idu6w21k" path="res://NinjaAdventure/Musics/17 - Fight.ogg" id="3_opwb6"]
+[ext_resource type="TileSet" uid="uid://bjm7jrewce46r" path="res://main_tiles.tres" id="1_a5udh"]
+[ext_resource type="Script" path="res://levels/level.gd" id="2_glynl"]
+[ext_resource type="AudioStream" uid="uid://cmdp3idu6w21k" path="res://NinjaAdventure/Musics/17 - Fight.ogg" id="3_gluxi"]
+[ext_resource type="Shader" path="res://levels/fog_shader.gdshader" id="4_vd36c"]
+[ext_resource type="Texture2D" uid="uid://bp44aky1hhvqh" path="res://levels/fog_noise_texture.png" id="5_4ff15"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m1ogk"]
+shader = ExtResource("4_vd36c")
+shader_parameter/density = 0.75
+shader_parameter/speed = Vector2(0.02, 0.01)
+shader_parameter/noise_texture = ExtResource("5_4ff15")
 
 [node name="TileMap" type="TileMap"]
 y_sort_enabled = true
-tile_set = ExtResource("1_cupw2")
+tile_set = ExtResource("1_a5udh")
 format = 2
 layer_0/name = "ground"
 layer_0/y_sort_enabled = true
@@ -17,24 +25,36 @@ layer_1/modulate = Color(1, 1, 1, 1)
 layer_1/y_sort_enabled = true
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
-layer_1/tile_data = PackedInt32Array(393231, 393216, 8, -131074, 393216, 8, -65538, 393216, 8, -2, 393216, 8, 65534, 393216, 8, 131070, 393216, 8, 196606, 393216, 8, 262142, 393216, 8, 327678, 393216, 8, 393214, 393216, 8, -131073, 393216, 8, -196608, 393216, 8, -196607, 393216, 8, -196606, 393216, 8, -196605, 393216, 8, -196604, 393216, 8, -196603, 393216, 8, -196602, 393216, 8, -196601, 393216, 8, -196600, 393216, 8, -196599, 393216, 8, -196598, 393216, 8, -196597, 393216, 8, -196596, 393216, 8, -196595, 393216, 8, -196594, 393216, 8, -196593, 393216, 8, -131057, 393216, 8, -65521, 393216, 8, 15, 393216, 8, 131087, 393216, 8, 196623, 393216, 8, 262159, 393216, 8, 327695, 393216, 8, 65551, 393216, 8, 458750, 393216, 8, 524286, 393216, 8, 458767, 393216, 8, 524303, 393216, 8, 589822, 393216, 8, 589823, 393216, 8, 524288, 393216, 8, 524289, 393216, 8, 524290, 393216, 8, 524291, 393216, 8, 524292, 393216, 8, 524293, 393216, 8, 524294, 393216, 8, 524295, 393216, 8, 524296, 393216, 8, 524297, 393216, 8, 524298, 393216, 8, 524299, 393216, 8, 524300, 393216, 8, 524301, 393216, 8, 524302, 393216, 8, 458765, 0, 6, 327682, 393216, 6, 9, 393216, 6, 131081, 393216, 6)
-script = ExtResource("2_1w0ch")
+layer_1/tile_data = PackedInt32Array(393231, 393216, 8, -131074, 393216, 8, -65538, 393216, 8, -2, 393216, 8, 65534, 393216, 8, 131070, 393216, 8, 196606, 393216, 8, 262142, 393216, 8, 327678, 393216, 8, 393214, 393216, 8, -131073, 393216, 8, -196608, 393216, 8, -196607, 393216, 8, -196606, 393216, 8, -196605, 393216, 8, -196604, 393216, 8, -196603, 393216, 8, -196602, 393216, 8, -196601, 393216, 8, -196600, 393216, 8, -196599, 393216, 8, -196598, 393216, 8, -196597, 393216, 8, -196596, 393216, 8, -196595, 393216, 8, -196594, 393216, 8, -196593, 393216, 8, -131057, 393216, 8, -65521, 393216, 8, 15, 393216, 8, 131087, 393216, 8, 196623, 393216, 8, 262159, 393216, 8, 327695, 393216, 8, 65551, 393216, 8, 458750, 393216, 8, 524286, 393216, 8, 458767, 393216, 8, 524303, 393216, 8, 589822, 393216, 8, 589823, 393216, 8, 524288, 393216, 8, 524289, 393216, 8, 524290, 393216, 8, 524291, 393216, 8, 524292, 393216, 8, 524293, 393216, 8, 524294, 393216, 8, 524295, 393216, 8, 524296, 393216, 8, 524297, 393216, 8, 524298, 393216, 8, 524299, 393216, 8, 524300, 393216, 8, 524301, 393216, 8, 524302, 393216, 8, 1, 393216, 6, 196610, 393216, 6, 65540, 393216, 6, 393216, 393216, 6, 393222, 393216, 6, 7, 393216, 6, 196615, 393216, 6, 393226, 393216, 6, 131085, 393216, 6, 65546, 393216, 6)
+script = ExtResource("2_glynl")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_opwb6")
+stream = ExtResource("3_gluxi")
 autoplay = true
 
 [node name="Spawn0" type="Marker2D" parent="." groups=["spawn"]]
-position = Vector2(2.08165e-12, -8)
 
 [node name="Spawn1" type="Marker2D" parent="." groups=["spawn"]]
-position = Vector2(190, -8)
+position = Vector2(203, 0)
 
 [node name="Spawn2" type="Marker2D" parent="." groups=["spawn"]]
-position = Vector2(2.08165e-12, 94)
+position = Vector2(48, 102)
 
 [node name="Spawn3" type="Marker2D" parent="." groups=["spawn"]]
-position = Vector2(190, 94)
+position = Vector2(206, 100)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = 10
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1152, 648)
+
+[node name="ColorRect" type="ColorRect" parent="ParallaxBackground/ParallaxLayer"]
+material = SubResource("ShaderMaterial_m1ogk")
+offset_left = -32.0
+offset_top = -49.0
+offset_right = 256.0
+offset_bottom = 145.0

@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dbk7h1a2tg05a"]
 
-[ext_resource type="Texture2D" uid="uid://cpgma6xsawnp0" path="res://NinjaAdventure/FX/Projectile/ShurikenMagic.png" id="1_3tcj3"]
 [ext_resource type="Script" path="res://projectile.gd" id="1_c52g0"]
 [ext_resource type="Texture2D" uid="uid://d37l3v3qmyqvx" path="res://NinjaAdventure/FX/Projectile/Shuriken.png" id="1_fd4dl"]
 [ext_resource type="PhysicsMaterial" uid="uid://lgvmibm2no3l" path="res://elastic.tres" id="1_lhwgq"]
+[ext_resource type="Texture2D" uid="uid://dhmm04qc4lwxa" path="res://NinjaAdventure/FX/Projectile/ShurikenMagic1.png" id="3_udfke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oh1od"]
 radius = 5.0
@@ -78,7 +78,7 @@ _data = {
 "normalspin": SubResource("Animation_s5oyc")
 }
 
-[node name="Projectile" type="RigidBody2D"]
+[node name="Projectile" type="RigidBody2D" groups=["Projectiles"]]
 physics_material_override = ExtResource("1_lhwgq")
 gravity_scale = 0.0
 max_contacts_reported = 2
@@ -88,7 +88,7 @@ linear_damp_mode = 1
 script = ExtResource("1_c52g0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3tcj3")
+texture = ExtResource("3_udfke")
 hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

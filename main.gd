@@ -4,11 +4,14 @@ extends Node2D
 
 signal player_disconnected
 signal selection_finished
+signal level_start
+signal level_finished
 
 var title_screen = true
 var start_screen = true
 var levels = [
-	load("res://levels/level1.tscn")
+	load("res://levels/level1.tscn"),
+	load("res://levels/level2.tscn")
 ]
 var player_sprites = [
 	{ # Blue Ninja
@@ -69,9 +72,13 @@ var player_sprites = [
 	}
 ]
 var ready_players = 0
+var current_level_id = 0
+var current_level
+var alive_players
 
 
 func _ready():
+	levels.shuffle()
 	get_node("/root/Main/Start_Screen").move_to_character_selector.connect(character_selector_started)
 	
 	await get_tree().create_timer(0.1).timeout
@@ -102,8 +109,15 @@ func add_player_selector(device_id):
 func check_selection_finished(player_status):
 	ready_players += player_status
 	if ready_players == get_tree().get_nodes_in_group("player_selectors").size():
+		$leaderboard.fade(true)
+		await get_tree().create_timer(1).timeout
 		start_screen = false
 		selection_finished.emit()
+		get_tree().call_group("Projectiles", "queue_free")
+		
+		var players = get_tree().get_nodes_in_group("Players")
+		for player in players:
+			player.player_died.connect(player_character_died)
 		load_next_level()
 		
 		
@@ -111,7 +125,28 @@ func character_selector_started():
 	title_screen = false
 
 
+func player_character_died(player_id):
+	alive_players.erase(player_id)
+	if alive_players.size() == 0:
+		await get_tree().create_timer(1).timeout
+		$leaderboard.fade(true)
+		await get_tree().create_timer(1).timeout
+		current_level.queue_free()
+		get_tree().call_group("Projectiles", "queue_free")
+		level_finished.emit()
+		load_next_level()
+	
+
 func load_next_level():
-	var new_level = levels[randi_range(0, levels.size() - 1)].instantiate()
-	get_tree().root.add_child(new_level)
-	new_level.start()
+	alive_players = get_tree().get_nodes_in_group("Players")
+	
+	current_level_id += 1
+	if current_level_id == levels.size():
+		current_level_id = 0
+	current_level = levels[current_level_id].instantiate()
+	get_tree().root.add_child(current_level)
+	current_level.start()
+	
+	level_start.emit()
+	$leaderboard.fade(false)
+	await get_tree().create_timer(1).timeout
