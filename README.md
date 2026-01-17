@@ -1,5 +1,6 @@
 # Ricochet Royale
 
+## Overview
 Ricochet Royale is a local four-player party brawler built around ricocheting projectiles and bouncy character physics. Players navigate obstacles-strewn arenas, throwing and ricocheting projectiles to outplay opponents.
 
 The game is built around a finite state machine (FSM) architecture for player behavior, enabling clean transitions between movement, attacking, hit reactions, and death. It supports controller input, making it play locally with friends.
