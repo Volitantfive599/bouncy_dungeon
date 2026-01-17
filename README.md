@@ -3,12 +3,14 @@
 [Tagline]
 
 ## Overview
-This project was originally created earlier in my development journey and is being revisited to improve documentation and project structure.
+[TODO]
 
 ## Features
 - Player movement and navigation
-- Finite-State-Machine based Player
-- TODO
+- Finite-State-Machine based player
+- Controller implementation
+- Piskel sprites & FastNoiseLite texture maps
+- Home screen, Character select, and multiple levels
 
 ## Status
 Archived project being documented for portfolio purposes.
