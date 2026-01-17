@@ -16,7 +16,7 @@
 Archived project being documented for portfolio purposes.
 
 ## Screenshots
-Screenshots coming soon
+[TODO]
 
 ## How to Run
 
