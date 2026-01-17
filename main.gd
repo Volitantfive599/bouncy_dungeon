@@ -11,7 +11,7 @@ var title_screen = true
 var start_screen = true
 var levels = [
 	load("res://levels/level1.tscn"),
-	load("res://levels/level2.tscn")
+	#load("res://levels/level2.tscn")
 ]
 var player_sprites = [
 	{ # Blue Ninja
