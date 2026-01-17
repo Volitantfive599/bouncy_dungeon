@@ -18,34 +18,33 @@ This project is now archived and documented as part of my technical game develop
 Archived project being documented for portfolio purposes.
 
 ## Screenshots
+
 <table>
   <tr>
     <td>
       <img src="https://github.com/user-attachments/assets/73015ff4-f89e-4967-bf8e-ba5fb3ad48bb"
            width="450"
-           style="border: 2px solid black;" />
+           border="2" />
     </td>
     <td>
       <img src="https://github.com/user-attachments/assets/fb167b55-3c70-4148-beec-2dbc887cee59"
            width="450"
-           style="border: 2px solid black;" />
+           border="2" />
     </td>
   </tr>
   <tr>
     <td>
       <img src="https://github.com/user-attachments/assets/f52acdc4-7a4a-4317-b851-261e0cdf72a6"
            width="450"
-           style="border: 2px solid black;" />
+           border="2" />
     </td>
     <td>
       <img src="https://github.com/user-attachments/assets/73e8b15f-3815-4a6c-8224-9a44fa55b800"
            width="450"
-           style="border: 10px solid black;" />
+           border="2" />
     </td>
   </tr>
 </table>
-
-
 
 ## How to Run
 
