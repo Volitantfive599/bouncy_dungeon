@@ -1,9 +1,13 @@
 # Ricochet Royale
 
-[Tagline]
+A fast-paced four-player party brawler built around ricocheting projectiles and bouncy character physics.
 
 ## Overview
-[TODO]
+Ricochet Royale is a local four-player free-for-all party game developed in Godot, focused on physics-driven combat. Players navigate obstacles-strewn arenas, throwing and ricocheting projectiles to outplay opponents.
+
+The game is built around a finite state machine (FSM) architecture for player behavior, enabling clean transitions between movement, attacking, hit reactions, and death. It supports controller input, making it play locally with friends.
+
+This project is now archived and documented as part of my technical game development portfolio.
 
 ## Features
 - Player movement and navigation
