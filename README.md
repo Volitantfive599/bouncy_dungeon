@@ -1,4 +1,4 @@
-# Mystic Woods
+# Ricochet Royale
 
 [Tagline]
 
