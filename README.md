@@ -40,7 +40,7 @@ Archived project being documented for portfolio purposes.
     <td>
       <img src="https://github.com/user-attachments/assets/73e8b15f-3815-4a6c-8224-9a44fa55b800"
            width="450"
-           style="border: 2px solid black;" />
+           style="border: 10px solid black;" />
     </td>
   </tr>
 </table>
