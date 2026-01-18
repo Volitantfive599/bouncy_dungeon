@@ -7,10 +7,10 @@ The game is built around a finite state machine (FSM) architecture for player be
 
 This project is now archived and documented as part of my technical game development portfolio.
 
-## Technical Highlights
+## Key Features
 - Player movement and navigation
-- Finite-State-Machine based player
-- Controller implementation
+- Finite-State-Machine player architecture
+- Full controller implementation
 - Piskel sprites & FastNoiseLite texture maps
 - Home screen, Character select, and multiple levels
 
